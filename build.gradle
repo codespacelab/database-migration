@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.codespacelab'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.projectlombok:lombok:1.16.16")
+	compile("org.flywaydb:flyway-core:5.2.4")
+	compile("net.sf.dozer:dozer:5.4.0") {
+		exclude group: "org.slf4j", module: "slf4j-log4j12"
+	}
+	runtime("org.mariadb.jdbc:mariadb-java-client:2.1.0") {
+		exclude group: "net.java.dev.jna"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
