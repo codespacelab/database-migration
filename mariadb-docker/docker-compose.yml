@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    container_name: test-mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=test
