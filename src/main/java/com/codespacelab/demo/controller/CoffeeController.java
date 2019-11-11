@@ -33,16 +33,16 @@ public class CoffeeController {
 
     @PostMapping
     public CoffeeDto addCoffee(
-            @Validated @RequestBody CoffeeDto memberDto
+            @Validated @RequestBody CoffeeDto coffeeDto
     ) {
-        return coffeeService.addCoffee(memberDto);
+        return coffeeService.addCoffee(coffeeDto);
     }
 
     @PutMapping
     public CoffeeDto updateCoffee(
-            @Validated @RequestBody CoffeeDto memberDto
+            @Validated @RequestBody CoffeeDto coffeeDto
     ) {
-        return coffeeService.updateCoffee(memberDto);
+        return coffeeService.updateCoffee(coffeeDto);
     }
 
     @DeleteMapping

@@ -32,26 +32,26 @@ public class CoffeeService {
         return coffeeRepository
                 .findAll()
                 .stream()
-                .map(memberList -> coffeeMapper.domainToDto(memberList)).collect(toList());
+                .map(coffee -> coffeeMapper.domainToDto(coffee)).collect(toList());
     }
 
     public CoffeeDto getCoffee(String name) {
-        Optional<Coffee> memberListOptional = coffeeRepository.findByName(name);
+        Optional<Coffee> coffeeOptional = coffeeRepository.findByName(name);
 
-        if(!memberListOptional.isPresent()) {
+        if(!coffeeOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad Request");
         }
 
         log.debug("Retrieving coffee object: " + name);
 
-        return coffeeMapper.domainToDto(memberListOptional.get());
+        return coffeeMapper.domainToDto(coffeeOptional.get());
     }
 
     @Transactional
     public CoffeeDto addCoffee(CoffeeDto coffeeDto) {
-        Optional<Coffee> memberListOptional = coffeeRepository.findByName(coffeeDto.getName());
+        Optional<Coffee> coffeeOptional = coffeeRepository.findByName(coffeeDto.getName());
 
-        if(memberListOptional.isPresent()) {
+        if(coffeeOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad Create Request");
         }
 
@@ -87,10 +87,10 @@ public class CoffeeService {
     }
 
     private CoffeeDto save(CoffeeDto coffeeDto) {
-        Coffee memberList = coffeeRepository.saveAndFlush(coffeeMapper.dtoToDomain(coffeeDto));
+        Coffee coffee = coffeeRepository.saveAndFlush(coffeeMapper.dtoToDomain(coffeeDto));
 
         log.debug("Saving coffee object: " + coffeeDto.getName());
 
-        return coffeeMapper.domainToDto(memberList);
+        return coffeeMapper.domainToDto(coffee);
     }
 }
